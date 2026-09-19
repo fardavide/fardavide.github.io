@@ -116,4 +116,8 @@ later. Because the repository is a user site, the build needs no change when tha
 is created by the first run of `pages.yml`, and `public/.nojekyll` travels with the build so
 GitHub serves the files as they are. The Pages source (`gh-pages`, path `/`) is server-side
 state set through the API, not something git restores: if the repository is ever recreated,
-re-apply it with `gh api -X PUT /repos/fardavide/fardavide.github.io/pages`.
+re-apply it with `gh api -X PUT /repos/fardavide/fardavide.github.io/pages`. Changing the source
+that way does not deploy anything by itself, measured on 2026-09-19: the latest Pages build stayed
+on the old `main` commit until a build was requested with
+`gh api -X POST /repos/fardavide/fardavide.github.io/pages/builds`. Later publishes need no such
+step, because a push to `gh-pages` triggers its own build.
