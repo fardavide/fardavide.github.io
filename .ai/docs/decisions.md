@@ -107,3 +107,13 @@ to the viewport as the design intends.
 per-pixel colour tolerance once the `macos-26` runner had matched the first baselines. Any
 difference now fails. A difference that turns out to be runner drift is measured and recorded
 here before any tolerance is added.
+
+## Published at fardavide.github.io, no custom domain for now
+
+The user chose (2026-09-19) to publish at the GitHub address first and attach `fardavide.dev`
+later. Because the repository is a user site, the build needs no change when that happens: a
+`public/CNAME` file plus the Pages `cname` setting and DNS records do it. The `gh-pages` branch
+is created by the first run of `pages.yml`, and `public/.nojekyll` travels with the build so
+GitHub serves the files as they are. The Pages source (`gh-pages`, path `/`) is server-side
+state set through the API, not something git restores: if the repository is ever recreated,
+re-apply it with `gh api -X PUT /repos/fardavide/fardavide.github.io/pages`.

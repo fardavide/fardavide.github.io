@@ -39,6 +39,10 @@ required, all five checks required, squash only, linear history, no bypass for a
 `--auto` merge; watch the checks, then merge. An out-of-date branch is rebased onto `main`, never
 merged with it.
 
+A squash merge to `main` that touches the page also publishes it: `.github/workflows/pages.yml`
+builds `dist/` and pushes it to `gh-pages`, which GitHub Pages serves. There is no separate
+release step.
+
 ## Traps
 
 - Playwright's Chromium is installed once per machine with `npx playwright install chromium`.
