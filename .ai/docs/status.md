@@ -10,17 +10,18 @@
 - **0.1.0**: the whole page. Filmstrip, facts grid, four project cards and footer from the
   design, the app screenshots under `public/shots/`, scroll-driven animations behind a
   `@supports` guard with a swipeable fallback, and byte-exact screenshot comparison.
+- **0.1.1**: published. `pages.yml` builds `dist/` on every merge that touches the page and
+  pushes it to `gh-pages`; the Pages source is `gh-pages`, set through the API once the first
+  publish created the branch. Live at https://fardavide.github.io/.
 
 ## Next
 
-1. Publishing: `pages.yml` pushing `dist/` to `gh-pages`, the Pages source switched from `main` to
-   `gh-pages`. No custom domain for now (user decision 2026-09-19); `fardavide.dev` can be
-   attached later without touching the build.
+1. Attach `fardavide.dev` when wanted: a `public/CNAME` file holding the domain, the Pages
+   `cname` set through the API, DNS at the registrar, then HTTPS enforcement. No build change.
+2. Replace the Aura stand-in screenshot (below).
 
 ## Not yet configured
 
-- GitHub Pages currently serves the raw `main` branch, auto-enabled by the repository name. It is
-  switched to `gh-pages` in the publishing step.
 - `public/shots/aura-cameras-filled.png` is a stand-in (the unfilled Aura snapshot) until the
   design's filled variant is downloaded from the design project by hand; the design tool cannot
   deliver files over 256 KiB.

@@ -2,7 +2,8 @@
 
 Davide Farella's personal website: one static page (hero, screenshot filmstrip, facts grid, four
 project cards, footer) implemented from a Claude Design project and published to GitHub Pages at
-fardavide.dev. No blog, no CMS, no backend. Repository: `fardavide/fardavide.github.io`.
+fardavide.github.io (the fardavide.dev domain is not attached yet). No blog, no CMS, no backend.
+Repository: `fardavide/fardavide.github.io`.
 
 ## Read first
 
@@ -46,8 +47,8 @@ There is no domain or data layer because the site holds no data. Details in
 
 `npm run build`, `npm test`, `npm run lint`, `npm run format:check`, `npm run typecheck`,
 `npm run test:screenshots`. `main` is protected by the `protect-main` ruleset: branch, PR, all
-five checks green, squash merge. No bypass exists for anyone. Details in the `build-and-test`
-skill.
+five checks green, squash merge. No bypass exists for anyone. A merge that touches the page
+publishes it through `.github/workflows/pages.yml`. Details in the `build-and-test` skill.
 
 ## Sanctioned tooling
 

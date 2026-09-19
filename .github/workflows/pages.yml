@@ -1,0 +1,76 @@
+name: Publish the site
+
+# The page at fardavide.github.io, rebuilt whenever anything it is built from moves on main.
+# Mirrors oltre.space: the built `dist/` is pushed wholesale to the `gh-pages` branch, which is
+# what Pages serves. Nothing is served from `main` itself.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'src/**'
+      - 'public/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'vite.config.ts'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+# To push the built site to `gh-pages`. Nothing else.
+permissions:
+  contents: write
+
+# Never two publishes at once, they would race on the same branch, and never cancel one half
+# way, because the loser of that race is a half-written site.
+concurrency:
+  group: publish-site
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Build and publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+
+      # A clone of `gh-pages` alone rather than a worktree of the checkout above: the checkout
+      # is shallow and on another branch, and this keeps the deploy independent of it. The very
+      # first publish finds no such branch and starts one from scratch.
+      - name: Publish to gh-pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          remote="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          pages="$RUNNER_TEMP/pages"
+          if git clone --branch gh-pages --single-branch --depth 1 "$remote" "$pages"; then
+            echo "Updating the existing gh-pages branch."
+          else
+            echo "No gh-pages branch yet; creating it."
+            git init -b gh-pages "$pages"
+            git -C "$pages" remote add origin "$remote"
+          fi
+
+          # `--delete`, and `.git` excluded from it: the site is generated wholesale, so a file
+          # that no longer has a source has to stop being served.
+          rsync -a --delete --exclude '.git' dist/ "$pages/"
+
+          git -C "$pages" config user.name 'github-actions[bot]'
+          git -C "$pages" config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git -C "$pages" add --all
+
+          if git -C "$pages" diff --cached --quiet; then
+            echo "The site is already what it should be; nothing to publish." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          git -C "$pages" commit -m "Publish the site from ${GITHUB_SHA:0:7}"
+          git -C "$pages" push origin HEAD:gh-pages
+          echo "Published https://fardavide.github.io/ from ${GITHUB_SHA:0:7}." >> "$GITHUB_STEP_SUMMARY"

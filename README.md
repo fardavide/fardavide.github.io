@@ -3,7 +3,8 @@
 Davide Farella's personal website: a single page presenting his work as a multi-platform
 developer and AI consultant, with a filmstrip of app screenshots and a card for each of Granita,
 Oltre, Aura and Swiftly. The page is implemented from a Claude Design project and published to
-GitHub Pages at [fardavide.dev](https://fardavide.dev).
+GitHub Pages at [fardavide.github.io](https://fardavide.github.io). The `fardavide.dev` domain
+is not attached yet; being a user site, attaching it later changes nothing in the build.
 
 ## Stack
 
@@ -41,12 +42,22 @@ npm run format:check        # Prettier
 Screenshot baselines are recorded on a Mac with `npm run test:screenshots -- --update-snapshots`
 and verified on a macOS runner in CI, so the comparison is byte-exact.
 
+## Publish
+
+Merging to `main` publishes. The `Publish the site` workflow (`.github/workflows/pages.yml`)
+builds `dist/` and pushes it to the `gh-pages` branch, which GitHub Pages serves. There is no
+manual release step; the workflow can also be dispatched by hand to republish without a change.
+
 ## Licence
 
 The code is released under the MIT licence (see `LICENSE`). The text, the name and the app
 screenshots are © Davide Farella and are not covered by it.
 
 ## Changelog
+
+### 0.1.1 — 2026-09-19
+
+- **Live at fardavide.github.io.** Every merge to `main` that touches the page now publishes it.
 
 ### 0.1.0 — 2026-09-19
 
