@@ -59,3 +59,26 @@ Shared agent content (guide, skills, docs) lives in `.ai/`, and `AGENTS.md`, `CL
 user's global harness, so any of Claude Code, Codex or Gemini opens the repo with the same
 instructions. A `.claude/`-only layout lost because it would need duplicating the moment a second
 tool is used. Host-specific settings stay in `.claude/`.
+
+## Fonts are self-hosted through Fontsource
+
+The design links Google Fonts. Serving Geist and Geist Mono from the site itself removes a
+third-party request on every visit and, more to the point here, makes the screenshot baselines
+independent of a network fetch. The `@fontsource` packages ship the same faces split by script
+with `unicode-range`, so a visitor only downloads the subsets their text needs; Vite's asset
+inlining is switched off so that stays true for the smallest subsets.
+
+## Reduced motion turns animations off rather than making them instant
+
+The design sets `animation-duration: 0s` under `prefers-reduced-motion`. That leaves the blooms
+drifting, since an infinite animation still cycles, and does nothing to scroll-driven
+animations, whose progress comes from a timeline rather than a duration. Every animation is set
+to `none` instead, which renders each element in its resting state. The screenshot tests emulate
+reduced motion, so this is also what they capture.
+
+## The `?theme=` URL override ships
+
+The design's preview script honours a `theme` query parameter. It is kept on the site because it
+is the one piece of runtime logic, it costs a few lines, and it gives a way to link to a specific
+appearance; it is also what the acceptance test drives. Respecting only the system preference
+would have left the site with no unit-testable code at all.

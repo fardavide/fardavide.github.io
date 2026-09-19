@@ -3,16 +3,16 @@
 ## Landed
 
 - **0.0.1**: scaffold. Vite + TypeScript toolchain, CI with five gating jobs (Build, Unit tests,
-  Lint, Type check, Screenshot tests), the `protect-main` ruleset, and this agent harness. The
-  page itself is a placeholder.
+  Lint, Type check, Screenshot tests), the `protect-main` ruleset, and this agent harness.
+- **0.0.2**: walking skeleton. The `?theme=light|dark` override as pure logic with unit tests and
+  an end-to-end test, the hero section from the design with self-hosted fonts, and screenshot
+  baselines for wide and narrow in dark and light, verified on CI.
 
 ## Next
 
-1. Walking skeleton: the theme override as pure logic plus DOM wiring, the hero section from the
-   design, and the first screenshot tests with committed baselines.
-2. The rest of the page from the design: screenshot filmstrip, facts grid, four project cards,
-   footer, self-hosted fonts.
-3. Publishing: `pages.yml` pushing `dist/` to `gh-pages`, the Pages source switched from `main` to
+1. The rest of the page from the design: screenshot filmstrip, facts grid, four project cards,
+   footer, with the app screenshots under `public/shots/`.
+2. Publishing: `pages.yml` pushing `dist/` to `gh-pages`, the Pages source switched from `main` to
    `gh-pages`, CNAME `fardavide.dev`, HTTPS enforced. Needs DNS at the registrar.
 
 ## Not yet configured
