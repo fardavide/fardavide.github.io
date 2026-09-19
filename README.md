@@ -48,6 +48,12 @@ screenshots are © Davide Farella and are not covered by it.
 
 ## Changelog
 
+### 0.0.2 — 2026-09-19
+
+- **The hero is in place.** Name, title, introduction and the GitHub link, in dark and light,
+  with the Geist fonts served from the site itself. Adding `?theme=light` or `?theme=dark` to the
+  address forces a theme regardless of the system setting.
+
 ### 0.0.1 — 2026-09-19
 
 - **Project scaffold.** Repository, toolchain and CI in place; the page itself is not published

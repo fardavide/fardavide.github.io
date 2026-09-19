@@ -1,6 +1,6 @@
 {
   "name": "fardavide.github.io",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "description": "Davide Farella's personal website, published at fardavide.dev",
   "type": "module",
@@ -11,8 +11,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "vitest run --passWithNoTests",
-    "test:screenshots": "playwright test --pass-with-no-tests",
+    "test": "vitest run",
+    "test:screenshots": "playwright test",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "format": "prettier --write .",
@@ -30,5 +30,9 @@
     "typescript-eslint": "^8.70.0",
     "vite": "^8.3.0",
     "vitest": "^5.0.1"
+  },
+  "dependencies": {
+    "@fontsource/geist": "^5.3.0",
+    "@fontsource/geist-mono": "^5.3.0"
   }
 }

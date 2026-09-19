@@ -1,0 +1,320 @@
+@import '@fontsource/geist/300.css';
+@import '@fontsource/geist/400.css';
+@import '@fontsource/geist/500.css';
+@import '@fontsource/geist/600.css';
+@import '@fontsource/geist-mono/400.css';
+@import '@fontsource/geist-mono/500.css';
+
+/* Tokens. Dark is the default; light follows the system preference or an explicit data-theme. */
+:root {
+  color-scheme: dark;
+  --bg: #08090b;
+  --ink: #f2f4f3;
+  --ink2: #a3aba8;
+  --ink3: #868e8b;
+  --line: rgba(255, 255, 255, 0.08);
+  --line2: rgba(255, 255, 255, 0.15);
+  --glass: rgba(255, 255, 255, 0.04);
+  --hi: rgba(255, 255, 255, 0.1);
+  --accent: #6be3b4;
+  --accent-ink: #07080a;
+  --accent-soft: rgba(107, 227, 180, 0.14);
+  --accent-line: rgba(107, 227, 180, 0.4);
+  --bloom: rgba(107, 227, 180, 0.18);
+  --bloom2: rgba(96, 132, 190, 0.18);
+  --pane: #0a0b0d;
+  --shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.9);
+  --hatch: rgba(255, 255, 255, 0.04);
+  --grid: rgba(255, 255, 255, 0.035);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+    --bg: #f4f4f1;
+    --ink: #121614;
+    --ink2: #4f5855;
+    --ink3: #616a68;
+    --line: rgba(10, 20, 15, 0.1);
+    --line2: rgba(10, 20, 15, 0.18);
+    --glass: rgba(255, 255, 255, 0.6);
+    --hi: rgba(255, 255, 255, 0.9);
+    --accent: #0b7350;
+    --accent-ink: #f3f4f2;
+    --accent-soft: rgba(11, 115, 80, 0.1);
+    --accent-line: rgba(11, 115, 80, 0.4);
+    --bloom: rgba(107, 227, 180, 0.5);
+    --bloom2: rgba(150, 180, 230, 0.45);
+    --pane: #e4e7e5;
+    --shadow: 0 40px 80px -30px rgba(20, 40, 30, 0.35);
+    --hatch: rgba(10, 20, 15, 0.05);
+    --grid: rgba(10, 20, 15, 0.05);
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #08090b;
+  --ink: #f2f4f3;
+  --ink2: #a3aba8;
+  --ink3: #868e8b;
+  --line: rgba(255, 255, 255, 0.08);
+  --line2: rgba(255, 255, 255, 0.15);
+  --glass: rgba(255, 255, 255, 0.04);
+  --hi: rgba(255, 255, 255, 0.1);
+  --accent: #6be3b4;
+  --accent-ink: #07080a;
+  --accent-soft: rgba(107, 227, 180, 0.14);
+  --accent-line: rgba(107, 227, 180, 0.4);
+  --bloom: rgba(107, 227, 180, 0.18);
+  --bloom2: rgba(96, 132, 190, 0.18);
+  --pane: #0a0b0d;
+  --shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.9);
+  --hatch: rgba(255, 255, 255, 0.04);
+  --grid: rgba(255, 255, 255, 0.035);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #f4f4f1;
+  --ink: #121614;
+  --ink2: #4f5855;
+  --ink3: #616a68;
+  --line: rgba(10, 20, 15, 0.1);
+  --line2: rgba(10, 20, 15, 0.18);
+  --glass: rgba(255, 255, 255, 0.6);
+  --hi: rgba(255, 255, 255, 0.9);
+  --accent: #0b7350;
+  --accent-ink: #f3f4f2;
+  --accent-soft: rgba(11, 115, 80, 0.1);
+  --accent-line: rgba(11, 115, 80, 0.4);
+  --bloom: rgba(107, 227, 180, 0.5);
+  --bloom2: rgba(150, 180, 230, 0.45);
+  --pane: #e4e7e5;
+  --shadow: 0 40px 80px -30px rgba(20, 40, 30, 0.35);
+  --hatch: rgba(10, 20, 15, 0.05);
+  --grid: rgba(10, 20, 15, 0.05);
+}
+
+/* Base */
+html {
+  scrollbar-width: thin;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Geist', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--ink);
+}
+
+.mono {
+  font-family: 'Geist Mono', ui-monospace, monospace;
+}
+
+/* Page: grid backdrop and the two drifting blooms */
+.page {
+  position: relative;
+  overflow: clip;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 96px 96px;
+  background-position: center top;
+}
+
+.bloom {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.bloom-a {
+  top: -20vh;
+  right: -10vw;
+  width: 70vw;
+  height: 80vh;
+  background: radial-gradient(closest-side, var(--bloom), transparent 70%);
+  filter: blur(90px);
+  animation: om-drift-a 70s ease-in-out infinite alternate;
+}
+
+.bloom-b {
+  top: 120vh;
+  left: -20vw;
+  width: 70vw;
+  height: 80vh;
+  background: radial-gradient(closest-side, var(--bloom2), transparent 70%);
+  filter: blur(100px);
+  animation: om-drift-b 90s ease-in-out infinite alternate;
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 6vw;
+  align-items: end;
+  padding: 12vh 6vw 6vh;
+}
+
+.hero-title {
+  animation: om-rise 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hero-aside {
+  padding-bottom: 10px;
+  animation: om-rise 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.18s both;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.name {
+  margin: 30px 0 0;
+  font-size: clamp(80px, 11vw, 184px);
+  line-height: 0.9;
+  font-weight: 300;
+  letter-spacing: -0.055em;
+  color: var(--ink);
+}
+
+.lede {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.7;
+  color: var(--ink2);
+  text-wrap: pretty;
+}
+
+.link-mono {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 28px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--accent-line);
+  color: var(--accent);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transition:
+    color 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.link-mono:hover {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+/* Narrow layout, below 900px */
+@media (max-width: 899px) {
+  .page {
+    background-size: 64px 64px;
+  }
+
+  .bloom-a {
+    top: -10vh;
+    right: -30vw;
+    width: 120vw;
+    height: 60vh;
+    filter: blur(70px);
+  }
+
+  .bloom-b {
+    top: 140vh;
+    left: -40vw;
+    width: 120vw;
+    height: 60vh;
+    filter: blur(80px);
+  }
+
+  .hero {
+    display: block;
+    padding: 9svh 22px 0;
+  }
+
+  .hero-aside {
+    padding-bottom: 0;
+    animation-delay: 0s;
+  }
+
+  .eyebrow {
+    font-size: 10px;
+    line-height: 1.8;
+    letter-spacing: 0.2em;
+  }
+
+  .name {
+    margin-top: 20px;
+    font-size: 72px;
+  }
+
+  .lede {
+    margin-top: 24px;
+    font-size: 15px;
+  }
+
+  .link-mono {
+    margin-top: 22px;
+    font-size: 11px;
+  }
+}
+
+/* Motion */
+@keyframes om-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes om-drift-a {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(6%, -5%, 0) scale(1.15);
+  }
+}
+
+@keyframes om-drift-b {
+  from {
+    transform: translate3d(0, 0, 0) scale(1.1);
+  }
+  to {
+    transform: translate3d(-6%, 6%, 0) scale(1);
+  }
+}
+
+/* Under reduced motion every animation is off, not merely instant: an animation with a
+   duration of 0s still runs when it is driven by a scroll timeline, and the blooms would
+   still drift. This is also the state the screenshot tests capture. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+  }
+}
