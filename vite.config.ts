@@ -6,6 +6,10 @@ export default defineConfig({
   base: '/',
   build: {
     outDir: 'dist',
+    // Never inline assets as base64. The self-hosted fonts are split into small per-script
+    // subsets that browsers fetch on demand through unicode-range; inlining the ones under the
+    // default 4 KiB limit would bake every subset into the stylesheet for every visitor.
+    assetsInlineLimit: 0,
   },
   test: {
     include: ['src/**/*.test.ts'],
