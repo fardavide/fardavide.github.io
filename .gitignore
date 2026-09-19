@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Playwright
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.*
+
+# Editors
+.idea/
+.vscode/
+*.swp
+
+# macOS
+.DS_Store
+
+# Claude Code personal settings
+.claude/settings.local.json
