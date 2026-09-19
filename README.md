@@ -48,6 +48,13 @@ screenshots are © Davide Farella and are not covered by it.
 
 ## Changelog
 
+### 0.1.0 — 2026-09-19
+
+- **The whole page is there.** A filmstrip of seven app screenshots that slides as you scroll,
+  the facts grid, cards for Granita, Oltre, Aura and Swiftly linking to each project, and the
+  footer. Browsers without scroll-driven animations get a swipeable filmstrip and cards at rest
+  instead of a broken layout.
+
 ### 0.0.2 — 2026-09-19
 
 - **The hero is in place.** Name, title, introduction and the GitHub link, in dark and light,

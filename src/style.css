@@ -224,6 +224,227 @@ a:hover {
   border-color: var(--ink);
 }
 
+/* Filmstrip of app screenshots. It scrolls with the page where scroll-driven animations are
+   supported and motion is welcome (see the @supports block near the end); otherwise it is a
+   plain horizontally scrollable strip. */
+.filmstrip {
+  position: relative;
+  padding: 6vh 0 4vh;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.filmstrip::-webkit-scrollbar {
+  display: none;
+}
+
+.strip {
+  display: flex;
+  gap: 22px;
+  align-items: flex-start;
+  width: max-content;
+  padding-left: 6vw;
+}
+
+.shot {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+}
+
+.shot:nth-child(even) {
+  margin-top: 48px;
+}
+
+.phone {
+  width: 200px;
+  height: 434px;
+  border-radius: 26px;
+  overflow: clip;
+  background: var(--pane);
+  border: 1px solid var(--line2);
+  box-shadow: var(--shadow);
+}
+
+.phone img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.shot figcaption {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink3);
+}
+
+/* Facts */
+.facts {
+  position: relative;
+  padding: 10vh 6vw 4vh;
+}
+
+.facts dl {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 32px;
+  margin: 0;
+}
+
+.fact {
+  padding-top: 20px;
+  border-top: 1px solid var(--line2);
+}
+
+.fact dt {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink3);
+}
+
+.fact dd {
+  margin: 14px 0 0;
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+
+/* Project cards. `overflow: clip` rather than `hidden` on the card and its media: a hidden
+   overflow makes the box a scroll container, and the view() timelines of everything inside
+   would then measure against the card instead of the viewport and never progress. */
+.projects {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  padding: 8vh 6vw 0;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: min(80vh, 760px);
+  border-radius: 28px;
+  overflow: clip;
+  background: var(--glass);
+  border: 1px solid var(--line);
+  box-shadow: inset 0 1px 0 var(--hi);
+  color: var(--ink);
+  transition:
+    border-color 0.5s ease,
+    transform 0.5s ease;
+}
+
+.card:nth-child(even) {
+  margin-top: 12vh;
+}
+
+.card:hover {
+  color: var(--ink);
+  border-color: var(--accent-line);
+  transform: translateY(-4px);
+}
+
+.card-media {
+  position: relative;
+  flex: 1;
+  overflow: clip;
+  margin: 18px 18px 0;
+  border-radius: 18px;
+  background: var(--pane);
+  border: 1px solid var(--line);
+}
+
+.card-media img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 140%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.card-media-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: repeating-linear-gradient(135deg, var(--hatch) 0 12px, transparent 12px 24px);
+}
+
+.card-media-empty span {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.8;
+  text-align: center;
+  color: var(--ink3);
+}
+
+.card-line {
+  height: 2px;
+  margin: 22px 26px 0;
+  background: var(--accent);
+  opacity: 0.85;
+  transform-origin: left;
+}
+
+.card-body {
+  padding: 18px 26px 28px;
+}
+
+.card-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0;
+  font-size: 36px;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.card-title span {
+  font-size: 20px;
+  color: var(--accent);
+}
+
+.card-summary {
+  margin: 12px 0 0;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink2);
+  text-wrap: pretty;
+}
+
+.card-meta {
+  margin: 16px 0 0;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink3);
+}
+
+/* Footer */
+.footer {
+  position: relative;
+  margin: 14vh 6vw 0;
+  padding: 28px 0 8vh;
+  border-top: 1px solid var(--line2);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink3);
+}
+
 /* Narrow layout, below 900px */
 @media (max-width: 899px) {
   .page {
@@ -276,6 +497,133 @@ a:hover {
     margin-top: 22px;
     font-size: 11px;
   }
+
+  .filmstrip {
+    padding: 40px 0 10px;
+  }
+
+  .strip {
+    gap: 12px;
+    padding-left: 22px;
+  }
+
+  .shot {
+    gap: 8px;
+  }
+
+  .shot:nth-child(even) {
+    margin-top: 28px;
+  }
+
+  .shot-scheme {
+    display: none;
+  }
+
+  .phone {
+    width: 130px;
+    height: 282px;
+    border-radius: 18px;
+  }
+
+  .shot figcaption {
+    letter-spacing: 0.12em;
+  }
+
+  .facts {
+    padding: 40px 22px 0;
+  }
+
+  .facts dl {
+    display: block;
+  }
+
+  .fact {
+    padding: 16px 0;
+  }
+
+  .fact:last-child {
+    border-bottom: 1px solid var(--line2);
+  }
+
+  .fact dt {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+  }
+
+  .fact dd {
+    margin-top: 8px;
+    font-size: 16px;
+  }
+
+  .projects {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 44px 22px 0;
+  }
+
+  .card {
+    height: 540px;
+    border-radius: 24px;
+  }
+
+  .card:nth-child(even) {
+    margin-top: 0;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+
+  .card-media {
+    margin: 14px 14px 0;
+    border-radius: 16px;
+  }
+
+  .card-media-empty {
+    background: repeating-linear-gradient(135deg, var(--hatch) 0 10px, transparent 10px 20px);
+  }
+
+  .card-media-empty span {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+  }
+
+  .card-line {
+    margin: 16px 20px 0;
+  }
+
+  .card-body {
+    padding: 14px 20px 22px;
+  }
+
+  .card-title {
+    gap: 12px;
+    font-size: 28px;
+    letter-spacing: -0.025em;
+  }
+
+  .card-title span {
+    font-size: 18px;
+  }
+
+  .card-summary {
+    margin-top: 10px;
+    font-size: 15px;
+  }
+
+  .card-meta {
+    margin-top: 12px;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+  }
+
+  .footer {
+    margin: 48px 22px 0;
+    padding: 20px 0 40px;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+  }
 }
 
 /* Motion */
@@ -305,6 +653,130 @@ a:hover {
   }
   to {
     transform: translate3d(-6%, 6%, 0) scale(1);
+  }
+}
+
+@keyframes sv-up {
+  from {
+    opacity: 0;
+    transform: translateY(48px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes sv-strip {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-34%);
+  }
+}
+
+@keyframes sv-pan {
+  from {
+    transform: translateY(2%) scale(1.08);
+  }
+  to {
+    transform: translateY(-26%) scale(1);
+  }
+}
+
+@keyframes sv-in {
+  from {
+    opacity: 0;
+    transform: translateY(80px) scale(0.93);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes sv-out {
+  to {
+    opacity: 0.5;
+    transform: translateY(-50px) scale(0.97);
+  }
+}
+
+@keyframes sv-line {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes sv-text {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Scroll-driven animations, only where the browser supports them and motion is welcome. A
+   browser without support would otherwise run these as ordinary zero-length animations and
+   leave every element stuck at its end keyframe. */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .filmstrip {
+      overflow: clip;
+    }
+
+    .strip {
+      animation: sv-strip linear both;
+      animation-timeline: scroll();
+      animation-range: 0px 240vh;
+    }
+
+    .fact {
+      animation: sv-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 80%;
+    }
+
+    .card {
+      animation:
+        sv-in linear both,
+        sv-out linear both;
+      animation-timeline: view(), view();
+      animation-range:
+        entry 0% entry 55%,
+        exit 30% exit 100%;
+    }
+
+    .card-media img {
+      animation: sv-pan linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+
+    .card-line {
+      animation: sv-line linear both;
+      animation-timeline: view();
+      animation-range: cover 12% cover 88%;
+    }
+
+    .card-body {
+      animation: sv-text linear both;
+      animation-timeline: view();
+      animation-range: entry 15% entry 70%;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) and (max-width: 899px) {
+    .strip {
+      animation-range: 0px 160vh;
+    }
   }
 }
 

@@ -22,6 +22,10 @@ export default defineConfig({
     toHaveScreenshot: {
       animations: 'disabled',
       scale: 'css',
+      // Byte-exact: no per-pixel colour tolerance and no allowance for differing pixels. The
+      // baselines are Mac renders verified on a Mac, so any difference is a real change.
+      threshold: 0,
+      maxDiffPixels: 0,
     },
   },
   webServer: {
