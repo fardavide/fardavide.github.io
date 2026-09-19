@@ -82,3 +82,28 @@ The design's preview script honours a `theme` query parameter. It is kept on the
 is the one piece of runtime logic, it costs a few lines, and it gives a way to link to a specific
 appearance; it is also what the acceptance test drives. Respecting only the system preference
 would have left the site with no unit-testable code at all.
+
+## Scroll-driven animations are guarded by `@supports`, with a scrollable filmstrip underneath
+
+The design attaches `animation-timeline` animations unconditionally. A browser without
+scroll-driven animations ignores the timeline and runs each one as an ordinary zero-length
+animation, which with `fill: both` leaves every card at its exit keyframe, half transparent and
+shifted, and the filmstrip stuck a third of the way along. The animations now live inside
+`@supports (animation-timeline: scroll())` and a `prefers-reduced-motion: no-preference` query.
+Everywhere else the filmstrip is a plain horizontally scrollable strip with its scrollbar hidden
+and the cards render at rest.
+
+## `overflow: clip` instead of `hidden` on the cards and their media
+
+`overflow: hidden` makes a box a scroll container, and a `view()` timeline measures against the
+nearest scroll container. With the design's `hidden`, the card's accent line, text block and
+panning image would track the card box they never move inside of, and never animate. `clip`
+clips the same rounded corners without creating a scroll container, so those timelines resolve
+to the viewport as the design intends.
+
+## Screenshot comparison is byte-exact
+
+`threshold: 0` and `maxDiffPixels: 0` in the Playwright config, tightened from the default
+per-pixel colour tolerance once the `macos-26` runner had matched the first baselines. Any
+difference now fails. A difference that turns out to be runner drift is measured and recorded
+here before any tolerance is added.
