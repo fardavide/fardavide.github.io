@@ -163,3 +163,6 @@ label is `xcode-27`, not `macos-27`. Its documented macOS 27.0.1 build 26A434 ma
 The screenshot job moves to that runner; the four portfolio baselines are re-recorded locally on
 macOS 27 and inspected. No source layout, snapshot scope, threshold or pixel allowance changes.
 This supersedes the macOS 26 runner choice above. CI still verifies rather than records.
+The next CI run confirms all 16 browser checks pass on macOS 27.0.1 (26A434), including all six
+page baselines. Matching the recording and verification OS resolves the measured differences
+without relaxing the comparator.
