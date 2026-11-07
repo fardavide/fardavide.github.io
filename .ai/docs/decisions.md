@@ -121,3 +121,45 @@ that way does not deploy anything by itself, measured on 2026-09-19: the latest 
 on the old `main` commit until a build was requested with
 `gh api -X POST /repos/fardavide/fardavide.github.io/pages/builds`. Later publishes need no such
 step, because a push to `gh-pages` triggers its own build.
+
+## Central source, separate GitHub Pages sites for Granita and the portfolio
+
+Davide chose on 2026-11-07 to keep Granita's website source in this repository, with a possible
+future Oltre website migration left separate. The main build includes `/granita/` for a local
+preview and a usable path on the portfolio domain. A separate Vite build makes Granita the root
+document for `granita.fardavide.dev`, without replacing the portfolio's domain or CNAME.
+
+Each GitHub Pages site has its own custom-domain setting. The app repository's otherwise unused
+`gh-pages` branch can host Granita's generated output while its source stays here. A dedicated
+SSH deploy key gives the website workflow write access to that repository; the normal workflow
+token cannot write across repositories. No broad personal access token is required. Initial
+branch creation, Pages settings, the deploy key and DNS remain explicit one-time setup, described
+in `granita-publishing.md`. Moving the source into the app repository lost to the user's choice;
+changing the hosting provider is unnecessary.
+
+## Granita's landing page follows the product's review loop
+
+The page leads with the diff on a real iPhone screen, then connects repository selection,
+reading, and copying a review. An iPad screenshot shows the wider composition. Its dark navy,
+mint accents and restrained CSS motion take Oltre's visual restraint as a reference while using
+Granita's own icon and screens. No product controls are simulated. On 2026-11-07 Davide confirmed
+there is no public TestFlight invite, so the mobile beta is plain explanatory text. The Mac CTA
+links to GitHub's latest published release rather than assuming the repository's current app
+version has a downloadable build.
+
+## Match screenshot recording and verification on macOS 27
+
+On 2026-11-07 the recording Mac reports macOS 27.0.1, build 26A434, while the first Granita CI
+run used macOS 26.7.2, build 25G332. The original portfolio baselines pass on that CI runner but
+fail locally; the new Granita baselines pass locally but fail on that runner. CI reports 2,218
+desktop and 2,265 mobile differing pixels, concentrated at text edges, with identical image
+dimensions. Raw PNG comparison finds 6,731 / 5,148 changed pixels, mostly channel deltas of one;
+the screenshot comparator excludes some antialias differences.
+
+Davide chose to adjust the setup to macOS 27, keeping the comparison exact. GitHub's supported
+label is `xcode-27`, not `macos-27`. Its documented macOS 27.0.1 build 26A434 matches this Mac:
+[runner software](https://github.com/actions/runner-images/blob/main/images/macos/xcode-27-arm64-Readme.md),
+[GitHub announcement](https://github.blog/changelog/2026-09-10-xcode-27-runner-image-now-runs-on-macos-27/).
+The screenshot job moves to that runner; the four portfolio baselines are re-recorded locally on
+macOS 27 and inspected. No source layout, snapshot scope, threshold or pixel allowance changes.
+This supersedes the macOS 26 runner choice above. CI still verifies rather than records.

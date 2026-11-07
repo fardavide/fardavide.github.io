@@ -10,7 +10,7 @@ test('should apply the light theme when the URL asks for it', async ({ page }) =
 test('should link each project card to its home', async ({ page }) => {
   await page.goto('/');
   const cards: readonly (readonly [RegExp, string])[] = [
-    [/^Granita/, 'https://github.com/fardavide/Granita'],
+    [/^Granita/, '/granita/'],
     [/^Oltre/, 'https://oltre.space'],
     [/^Aura/, 'https://github.com/fardavide/Aura'],
     [/^Swiftly/, 'https://github.com/fardavide/Swiftly'],

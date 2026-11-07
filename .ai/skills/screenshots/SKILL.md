@@ -1,6 +1,6 @@
 ---
 name: screenshots
-description: How Playwright screenshot baselines for fardavide.dev are recorded (locally, on a Mac) and verified (CI, macos-26), and what never to do - regenerate on CI, record on Linux, or add tolerance to hide drift. Use when a screenshot test fails, a visual change is intended, or a screenshot test is added.
+description: How Playwright screenshot baselines for fardavide.dev are recorded (locally, on macOS 27) and verified (CI, xcode-27 on macOS 27), and what never to do - regenerate on CI, record on Linux, or add tolerance to hide drift. Use when a screenshot test fails, a visual change is intended, or a screenshot test is added.
 when_to_use: When a screenshot test fails, when a change to the page's look is intended, or when adding a screenshot test.
 user-invocable: true
 ---
@@ -13,7 +13,7 @@ motion, CSS-pixel scale. The page under test is the built `dist/`.
 
 ## Record
 
-Only on a Mac, only for a change you intend:
+Only on macOS 27, only for a change you intend:
 
 ```
 npm run test:screenshots -- --update-snapshots
@@ -24,7 +24,7 @@ re-recorded one nobody looked at asserts nothing.
 
 ## Verify
 
-`npm run test:screenshots` locally, and the `Screenshot tests` job on CI, which runs on `macos-26`
+`npm run test:screenshots` locally, and the `Screenshot tests` job on CI, which runs on `xcode-27` (macOS 27)
 so the render matches a Mac byte for byte. A failure uploads `playwright-report/` and
 `test-results/` (expected, actual, diff) as the `playwright-report` artifact.
 
@@ -36,4 +36,4 @@ so the render matches a Mac byte for byte. A failure uploads `playwright-report/
 - Add `maxDiffPixels` or `threshold` to make a red run green. If the macOS runner ever drifts from
   a local Mac, measure the drift and record the number in `decisions.md` before adding any
   tolerance.
-- Bump the runner image (`macos-26`) without checking it still matches the recording machine.
+- Bump the runner image (`xcode-27`, macOS 27) without checking it still matches the recording machine.

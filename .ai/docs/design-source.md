@@ -30,3 +30,22 @@ app repositories instead, as the table below records.
 
 Downscaling uses the macOS built-in: `sips --resampleWidth 560 in.png --out out.png`. The design
 shows these at 200 by 434 CSS pixels in the filmstrip, so 560 px covers a 2.8x device pixel ratio.
+
+## Granita landing page
+
+The new composition is authored here. Oltre's `site/index.html` supplies the reference for a
+restrained dark page, product screenshots and gentle motion. Product facts were checked against
+Granita's README on 2026-11-07; public releases were checked separately before linking the download.
+
+The full-resolution PNGs in `granita/media/` come from `fardavide/granita` on `main`:
+
+| Local file             | Source                                                                                                   |
+| ---------------------- | -------------------------------------------------------------------------------------------------------- |
+| `diff-iphone.png`      | `Apps/GranitaMobileSnapshotTests/__Snapshots__/ReadmeScreenshotTests/screenshot-of.diff-iPhone-dark.png` |
+| `worktrees-iphone.png` | Same folder, `screenshot-of.worktrees-iPhone-light.png`                                                  |
+| `review-iphone.png`    | Same folder, `screenshot-of.review-iPhone-light.png`                                                     |
+| `diff-ipad.png`        | Same folder, `screenshot-of.diff-iPad-light.png`                                                         |
+| `icon.png`             | `Apps/GranitaMobile/Assets.xcassets/AppIcon.appiconset/icon-dark-1024.png`                               |
+
+These are real app baselines, with no fabricated code or simulated controls. To refresh them,
+download those source paths and review the page's Mac-recorded screenshot baselines.
