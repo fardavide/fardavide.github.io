@@ -38,18 +38,23 @@ explains the Pages configuration and CNAME target.
 ## Verified locally, 2026-11-07
 
 - Both production builds succeed; the standalone output includes the intended CNAME.
-- Type check, lint, unit tests and formatting pass before the final documentation pass.
+- Type check, lint, unit tests and formatting pass; all five CI jobs are green.
 - Granita's six checks cover navigation, phone/tablet overflow and both Mac-recorded screenshot
   baselines. Images are decoded before
   capture; the screenshot suite uses reduced motion.
 - The first CI run uses macOS 26 and passes the original portfolio baselines while rejecting
   Granita's macOS 27 recordings. The local Mac is macOS 27.0.1 (26A434). Verification moves to
   `xcode-27`, whose documented OS build matches, and the portfolio baselines are re-recorded
-  locally on macOS 27. See `decisions.md` for measured differences. Pixel tolerance stays zero.
+  locally on macOS 27. The rerun confirms all 16 browser checks pass on macOS 27.0.1 (26A434),
+  matching the recording Mac. See `decisions.md` for measured differences. Pixel tolerance stays zero.
 
 ## Still pending
 
-The source branch is pushed and the publishing deploy key is installed and verified. Local copies
-of the private key have been removed. Granita's publishing branch, Pages configuration and DNS
-are still pending, so the subdomain is not live. No Namecheap-capable plugin was found, so DNS
-needs the domain owner's action or an explicitly authorized registrar browser session.
+Granita's `gh-pages` branch contains the standalone build. Pages reports `built`, source
+`gh-pages` at `/`, and custom domain `granita.fardavide.dev`. The publishing deploy key is
+installed and verified; local copies of its private key have been removed.
+
+Namecheap DNS and HTTPS enforcement are still pending, so the subdomain is not live. No
+Namecheap-capable plugin was found; the domain owner has been asked to add the CNAME record.
+After DNS resolves, wait for GitHub's certificate and enable HTTPS enforcement, then verify the
+deployed page and assets. The portfolio's existing `fardavide.dev` Pages configuration is unchanged.

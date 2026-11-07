@@ -1,20 +1,15 @@
 # Status
 
-## Prepared locally
+## Landed
 
 - **0.2.0**: Granita's landing page, with real iPhone/iPad screenshots, CSS entrance and scroll
   motion, reduced-motion support, a Mac download and an explicit private TestFlight beta. The
-  source stays here; the normal build includes `/granita/` and the standalone build is ready for
-  `granita.fardavide.dev`. Publication is pending review and the one-time setup in
+  source stays here; the normal build includes `/granita/` and the standalone build targets
+  `granita.fardavide.dev`. Its generated branch, Pages custom domain and publishing key are
+  configured. Namecheap DNS and HTTPS enforcement remain pending; see
   [Granita publishing](granita-publishing.md).
-- Granita's six browser checks pass, including phone/tablet overflow, and the portfolio's Granita
-  card links to the new page. The first CI run passes 14 checks, including the original portfolio
-  baselines, but rejects Granita's two macOS 27 recordings on its macOS 26 runner. Davide approved
-  moving verification to `xcode-27` (macOS 27) and locally re-recording the portfolio baselines.
-  Pixel tolerance remains zero. The rerun is pending.
-
-## Landed
-
+  All 16 browser checks pass locally and on CI. Screenshot verification uses `xcode-27` on
+  macOS 27.0.1 (26A434), matching the recording Mac, with zero pixel tolerance.
 - **0.0.1**: scaffold. Vite + TypeScript toolchain, CI with five gating jobs (Build, Unit tests,
   Lint, Type check, Screenshot tests), the `protect-main` ruleset, and this agent harness.
 - **0.0.2**: walking skeleton. The `?theme=light|dark` override as pure logic with unit tests and
@@ -29,9 +24,8 @@
 
 ## Next
 
-1. Complete Granita's publication and subdomain setup after review.
-2. Verify the macOS 27 screenshot migration on CI before merging.
-3. Replace the Aura stand-in screenshot (below).
+1. Complete Granita's Namecheap DNS and HTTPS setup.
+2. Replace the Aura stand-in screenshot (below).
 
 `fardavide.dev` is already attached: the live Pages settings report the custom domain and HTTPS
 enforcement, verified 2026-11-07.
