@@ -146,3 +146,20 @@ Granita's own icon and screens. No product controls are simulated. On 2026-11-07
 there is no public TestFlight invite, so the mobile beta is plain explanatory text. The Mac CTA
 links to GitHub's latest published release rather than assuming the repository's current app
 version has a downloadable build.
+
+## Match screenshot recording and verification on macOS 27
+
+On 2026-11-07 the recording Mac reports macOS 27.0.1, build 26A434, while the first Granita CI
+run used macOS 26.7.2, build 25G332. The original portfolio baselines pass on that CI runner but
+fail locally; the new Granita baselines pass locally but fail on that runner. CI reports 2,218
+desktop and 2,265 mobile differing pixels, concentrated at text edges, with identical image
+dimensions. Raw PNG comparison finds 6,731 / 5,148 changed pixels, mostly channel deltas of one;
+the screenshot comparator excludes some antialias differences.
+
+Davide chose to adjust the setup to macOS 27, keeping the comparison exact. GitHub's supported
+label is `xcode-27`, not `macos-27`. Its documented macOS 27.0.1 build 26A434 matches this Mac:
+[runner software](https://github.com/actions/runner-images/blob/main/images/macos/xcode-27-arm64-Readme.md),
+[GitHub announcement](https://github.blog/changelog/2026-09-10-xcode-27-runner-image-now-runs-on-macos-27/).
+The screenshot job moves to that runner; the four portfolio baselines are re-recorded locally on
+macOS 27 and inspected. No source layout, snapshot scope, threshold or pixel allowance changes.
+This supersedes the macOS 26 runner choice above. CI still verifies rather than records.

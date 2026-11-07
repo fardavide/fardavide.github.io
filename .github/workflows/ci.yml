@@ -69,11 +69,11 @@ jobs:
       - run: npm run typecheck
 
   # Screenshot baselines are recorded on a Mac, so they are verified on a Mac: the same OS at
-  # both ends is what lets the comparison stay byte-exact with no tolerance. Pinned to macos-26
-  # to match the machine the baselines are recorded on; bump both together.
+  # both ends is what lets the comparison stay byte-exact with no tolerance. The xcode-27 label
+  # runs macOS 27, matching the recording machine; update both together.
   screenshots:
     name: Screenshot tests
-    runs-on: macos-26
+    runs-on: xcode-27
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v7

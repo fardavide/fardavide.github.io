@@ -42,14 +42,14 @@ explains the Pages configuration and CNAME target.
 - Granita's six checks cover navigation, phone/tablet overflow and both Mac-recorded screenshot
   baselines. Images are decoded before
   capture; the screenshot suite uses reduced motion.
-- The full suite has four existing portfolio screenshot mismatches. A control with the original
-  Vite build configuration reproduces the same 805-pixel desktop dark difference. The visible
-  difference is concentrated around text edges; its environmental cause is not established.
-  The portfolio's source styles and screenshot baselines remain unchanged. No tolerance was added.
+- The first CI run uses macOS 26 and passes the original portfolio baselines while rejecting
+  Granita's macOS 27 recordings. The local Mac is macOS 27.0.1 (26A434). Verification moves to
+  `xcode-27`, whose documented OS build matches, and the portfolio baselines are re-recorded
+  locally on macOS 27. See `decisions.md` for measured differences. Pixel tolerance stays zero.
 
 ## Still pending
 
-No branch push, Pages configuration, deploy-key installation or DNS change has been made in this
-session. Granita's Pages API returns 404 and `granita.fardavide.dev` has no DNS answer. The website
-is reviewable locally but the subdomain is not live. No Namecheap-capable plugin was found, so DNS
+The source branch is pushed and the publishing deploy key is installed and verified. Local copies
+of the private key have been removed. Granita's publishing branch, Pages configuration and DNS
+are still pending, so the subdomain is not live. No Namecheap-capable plugin was found, so DNS
 needs the domain owner's action or an explicitly authorized registrar browser session.

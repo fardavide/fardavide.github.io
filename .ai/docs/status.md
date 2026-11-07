@@ -8,9 +8,10 @@
   `granita.fardavide.dev`. Publication is pending review and the one-time setup in
   [Granita publishing](granita-publishing.md).
 - Granita's six browser checks pass, including phone/tablet overflow, and the portfolio's Granita
-  card links to the new page. The full suite's four existing portfolio screenshot
-  comparisons fail; a control with the original build configuration reproduces the exact same
-  desktop dark difference (805 pixels). The baseline and tolerance are unchanged.
+  card links to the new page. The first CI run passes 14 checks, including the original portfolio
+  baselines, but rejects Granita's two macOS 27 recordings on its macOS 26 runner. Davide approved
+  moving verification to `xcode-27` (macOS 27) and locally re-recording the portfolio baselines.
+  Pixel tolerance remains zero. The rerun is pending.
 
 ## Landed
 
@@ -29,7 +30,7 @@
 ## Next
 
 1. Complete Granita's publication and subdomain setup after review.
-2. Resolve the existing portfolio screenshot drift before merging if CI reproduces it.
+2. Verify the macOS 27 screenshot migration on CI before merging.
 3. Replace the Aura stand-in screenshot (below).
 
 `fardavide.dev` is already attached: the live Pages settings report the custom domain and HTTPS
