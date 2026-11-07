@@ -121,3 +121,28 @@ that way does not deploy anything by itself, measured on 2026-09-19: the latest 
 on the old `main` commit until a build was requested with
 `gh api -X POST /repos/fardavide/fardavide.github.io/pages/builds`. Later publishes need no such
 step, because a push to `gh-pages` triggers its own build.
+
+## Central source, separate GitHub Pages sites for Granita and the portfolio
+
+Davide chose on 2026-11-07 to keep Granita's website source in this repository, with a possible
+future Oltre website migration left separate. The main build includes `/granita/` for a local
+preview and a usable path on the portfolio domain. A separate Vite build makes Granita the root
+document for `granita.fardavide.dev`, without replacing the portfolio's domain or CNAME.
+
+Each GitHub Pages site has its own custom-domain setting. The app repository's otherwise unused
+`gh-pages` branch can host Granita's generated output while its source stays here. A dedicated
+SSH deploy key gives the website workflow write access to that repository; the normal workflow
+token cannot write across repositories. No broad personal access token is required. Initial
+branch creation, Pages settings, the deploy key and DNS remain explicit one-time setup, described
+in `granita-publishing.md`. Moving the source into the app repository lost to the user's choice;
+changing the hosting provider is unnecessary.
+
+## Granita's landing page follows the product's review loop
+
+The page leads with the diff on a real iPhone screen, then connects repository selection,
+reading, and copying a review. An iPad screenshot shows the wider composition. Its dark navy,
+mint accents and restrained CSS motion take Oltre's visual restraint as a reference while using
+Granita's own icon and screens. No product controls are simulated. On 2026-11-07 Davide confirmed
+there is no public TestFlight invite, so the mobile beta is plain explanatory text. The Mac CTA
+links to GitHub's latest published release rather than assuming the repository's current app
+version has a downloadable build.

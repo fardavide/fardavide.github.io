@@ -1,5 +1,17 @@
 # Status
 
+## Prepared locally
+
+- **0.2.0**: Granita's landing page, with real iPhone/iPad screenshots, CSS entrance and scroll
+  motion, reduced-motion support, a Mac download and an explicit private TestFlight beta. The
+  source stays here; the normal build includes `/granita/` and the standalone build is ready for
+  `granita.fardavide.dev`. Publication is pending review and the one-time setup in
+  [Granita publishing](granita-publishing.md).
+- Granita's six browser checks pass, including phone/tablet overflow, and the portfolio's Granita
+  card links to the new page. The full suite's four existing portfolio screenshot
+  comparisons fail; a control with the original build configuration reproduces the exact same
+  desktop dark difference (805 pixels). The baseline and tolerance are unchanged.
+
 ## Landed
 
 - **0.0.1**: scaffold. Vite + TypeScript toolchain, CI with five gating jobs (Build, Unit tests,
@@ -16,9 +28,12 @@
 
 ## Next
 
-1. Attach `fardavide.dev` when wanted: a `public/CNAME` file holding the domain, the Pages
-   `cname` set through the API, DNS at the registrar, then HTTPS enforcement. No build change.
-2. Replace the Aura stand-in screenshot (below).
+1. Complete Granita's publication and subdomain setup after review.
+2. Resolve the existing portfolio screenshot drift before merging if CI reproduces it.
+3. Replace the Aura stand-in screenshot (below).
+
+`fardavide.dev` is already attached: the live Pages settings report the custom domain and HTTPS
+enforcement, verified 2026-11-07.
 
 ## Not yet configured
 

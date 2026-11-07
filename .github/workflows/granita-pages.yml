@@ -1,0 +1,59 @@
+name: Publish Granita
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'granita/**'
+      - 'src/granita.css'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'vite.granita.config.ts'
+      - '.github/workflows/granita-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-granita
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Build and publish Granita
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build:granita
+
+      # The source stays here. Only generated output is written to the app repository.
+      # One-time setup: create its gh-pages branch and install the scoped deploy key.
+      - name: Check out the publishing branch
+        uses: actions/checkout@v7
+        with:
+          repository: fardavide/granita
+          ref: gh-pages
+          path: .granita-pages
+          ssh-key: ${{ secrets.GRANITA_PAGES_DEPLOY_KEY }}
+
+      - name: Publish to gh-pages
+        run: |
+          set -euo pipefail
+          rsync -a --delete --exclude '.git' dist-granita/ .granita-pages/
+          git -C .granita-pages config user.name 'github-actions[bot]'
+          git -C .granita-pages config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git -C .granita-pages add --all
+          if git -C .granita-pages diff --cached --quiet; then
+            echo 'Granita is already up to date.' >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          git -C .granita-pages commit -m "Publish Granita from ${GITHUB_SHA:0:7}"
+          git -C .granita-pages push origin HEAD:gh-pages
+          echo 'Published https://granita.fardavide.dev/.' >> "$GITHUB_STEP_SUMMARY"

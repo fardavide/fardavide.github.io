@@ -3,6 +3,7 @@ node_modules/
 
 # Build output
 dist/
+dist-granita/
 
 # Playwright
 test-results/

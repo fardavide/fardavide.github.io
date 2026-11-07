@@ -3,12 +3,13 @@
 Narrative for fardavide.dev: how it is built, why, and where it stands. Rules live in
 `.ai/skills/`; this folder explains and records.
 
-| Doc                                  | Holds                                                                   |
-| ------------------------------------ | ----------------------------------------------------------------------- |
-| [architecture.md](architecture.md)   | How the page is organised and why it has a single layer                 |
-| [decisions.md](decisions.md)         | Key choices, ADR-style, newest last                                     |
-| [status.md](status.md)               | What has landed, what is next, what is still unconfigured               |
-| [design-source.md](design-source.md) | Where the design and its screenshots come from, and how to refresh them |
+| Doc                                            | Holds                                                                        |
+| ---------------------------------------------- | ---------------------------------------------------------------------------- |
+| [architecture.md](architecture.md)             | How the page is organised and why it has a single layer                      |
+| [decisions.md](decisions.md)                   | Key choices, ADR-style, newest last                                          |
+| [status.md](status.md)                         | What has landed, what is next, what is still unconfigured                    |
+| [design-source.md](design-source.md)           | Where the design and its screenshots come from, and how to refresh them      |
+| [granita-publishing.md](granita-publishing.md) | Granita's standalone build, cross-repository publication and subdomain setup |
 
 ## For agents
 
