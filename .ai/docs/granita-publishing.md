@@ -48,13 +48,21 @@ explains the Pages configuration and CNAME target.
   locally on macOS 27. The rerun confirms all 16 browser checks pass on macOS 27.0.1 (26A434),
   matching the recording Mac. See `decisions.md` for measured differences. Pixel tolerance stays zero.
 
-## Still pending
+## Verified deployment, 2026-11-07
 
 Granita's `gh-pages` branch contains the standalone build. Pages reports `built`, source
 `gh-pages` at `/`, and custom domain `granita.fardavide.dev`. The publishing deploy key is
 installed and verified; local copies of its private key have been removed.
 
-Namecheap DNS and HTTPS enforcement are still pending, so the subdomain is not live. No
-Namecheap-capable plugin was found; the domain owner has been asked to add the CNAME record.
-After DNS resolves, wait for GitHub's certificate and enable HTTPS enforcement, then verify the
-deployed page and assets. The portfolio's existing `fardavide.dev` Pages configuration is unchanged.
+The domain owner added the Namecheap CNAME: `granita` points to `fardavide.github.io`. Both
+authoritative nameservers and Cloudflare's public resolver return the intended record. GitHub's
+DNS health check reports the domain valid and eligible for HTTPS.
+
+The custom domain was refreshed in Pages after DNS became valid, following
+[GitHub's certificate-provisioning guidance](https://docs.github.com/en/pages/getting-started-with-github-pages/securing-your-github-pages-site-with-https).
+GitHub then approved the certificate for `granita.fardavide.dev`. HTTPS enforcement is enabled.
+The secure root, stylesheet, icon and all four app screenshots return HTTP 200. HTTP redirects
+to HTTPS, and the portfolio's `/granita/` link redirects to the secure subdomain.
+
+Live at [granita.fardavide.dev](https://granita.fardavide.dev/). The portfolio's existing
+`fardavide.dev` Pages configuration is unchanged. There is no remaining DNS or HTTPS setup.
