@@ -3,8 +3,8 @@
 Davide Farella's websites: the personal portfolio at [fardavide.dev](https://fardavide.dev),
 and Granita's landing page. The portfolio presents his work as a multi-platform developer and AI
 consultant, with a filmstrip of app screenshots and a card for each of Granita, Oltre, Aura and
-Swiftly. Granita has its own page at `/granita/`, plus a standalone build prepared for
-`granita.fardavide.dev`. Both sites' sources stay in this repository.
+Swiftly. Granita is published at [granita.fardavide.dev](https://granita.fardavide.dev/), with a
+local preview at `/granita/`. Both sites' sources stay in this repository.
 
 ## Stack
 
@@ -51,8 +51,8 @@ builds `dist/` and pushes it to the `gh-pages` branch, which GitHub Pages serves
 manual release step; the workflow can also be dispatched by hand to republish without a change.
 
 Granita's separate workflow publishes `dist-granita/` to the app repository's `gh-pages` branch.
-It requires one-time Pages and deploy-key setup, plus the subdomain DNS record. See
-[Granita publishing](.ai/docs/granita-publishing.md) for the setup and current limitations.
+Its Pages, deploy-key, DNS and HTTPS setup is complete. See
+[Granita publishing](.ai/docs/granita-publishing.md) for the configuration and verification record.
 
 ## Licence
 

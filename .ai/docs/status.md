@@ -6,7 +6,8 @@
   motion, reduced-motion support, a Mac download and an explicit private TestFlight beta. The
   source stays here; the normal build includes `/granita/` and the standalone build targets
   `granita.fardavide.dev`. Its generated branch, Pages custom domain and publishing key are
-  configured. Namecheap DNS and HTTPS enforcement remain pending; see
+  configured. Namecheap DNS resolves and HTTPS is enforced at
+  [granita.fardavide.dev](https://granita.fardavide.dev/); see
   [Granita publishing](granita-publishing.md).
   All 16 browser checks pass locally and on CI. Screenshot verification uses `xcode-27` on
   macOS 27.0.1 (26A434), matching the recording Mac, with zero pixel tolerance.
@@ -24,8 +25,7 @@
 
 ## Next
 
-1. Complete Granita's Namecheap DNS and HTTPS setup.
-2. Replace the Aura stand-in screenshot (below).
+1. Replace the Aura stand-in screenshot (below).
 
 `fardavide.dev` is already attached: the live Pages settings report the custom domain and HTTPS
 enforcement, verified 2026-11-07.
