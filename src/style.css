@@ -352,6 +352,45 @@ a:hover {
   transform: translateY(-4px);
 }
 
+.card-home {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  color: inherit;
+}
+
+.card-home:hover {
+  color: inherit;
+}
+
+.card-action {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 44px;
+  margin-top: 24px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+.card-source {
+  position: absolute;
+  right: 26px;
+  bottom: 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  color: var(--ink3);
+  font-size: 11px;
+}
+
 .card-media {
   position: relative;
   flex: 1;
@@ -595,6 +634,11 @@ a:hover {
 
   .card-body {
     padding: 14px 20px 22px;
+  }
+
+  .card-source {
+    right: 20px;
+    bottom: 22px;
   }
 
   .card-title {
