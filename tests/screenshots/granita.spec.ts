@@ -13,6 +13,24 @@ test('should reach setup from the Granita introduction', async ({ page }) => {
   ).toBeInViewport();
 });
 
+test('should open the repository from Granita’s top navigation', async ({ page, context }) => {
+  await context.route('https://github.com/fardavide/granita', async (route) => {
+    await route.fulfill({ contentType: 'text/html', body: '<title>Granita repository</title>' });
+  });
+  await page.goto('/granita/');
+  const source = page
+    .getByRole('navigation', { name: 'Main navigation' })
+    .getByRole('link', { name: /github/i });
+
+  await expect(source).toBeVisible();
+  await expect(source).toBeInViewport({ ratio: 1 });
+  await page.setViewportSize({ width: 320, height: 844 });
+  await expect(source).toBeInViewport({ ratio: 1 });
+  await source.click();
+
+  await expect(page).toHaveURL('https://github.com/fardavide/granita');
+});
+
 test('should match the Granita baseline', async ({ page }) => {
   await page.goto('/granita/');
   await page.evaluate(() => document.fonts.ready.then(() => undefined));

@@ -61,6 +61,12 @@ screenshots are © Davide Farella and are not covered by it.
 
 ## Changelog
 
+### 0.2.1 — 2026-11-08
+
+- **Project links are easy to find.** Granita and Oltre lead with a website action and a secondary
+  GitHub link. Aura and Swiftly have a single GitHub action. Granita’s own page exposes GitHub in
+  the top navigation on desktop and mobile.
+
 ### 0.2.0 — 2026-11-07
 
 - **Granita has its own landing page.** Real iPhone and iPad screenshots explain reading diffs,

@@ -2,6 +2,11 @@
 
 ## Landed
 
+- **0.2.1**: consistent project card actions. Granita and Oltre lead with Visit website and a
+  secondary GitHub link; Aura and Swiftly have a single GitHub action. Granita's top navigation
+  exposes GitHub on desktop and phones. All 26 browser checks pass locally, including navigation
+  to every card destination and the Granita header link at 320px. Updated dark/light portfolio
+  and Granita baselines were recorded and reviewed on macOS 27.
 - **0.2.0**: Granita's landing page, with real iPhone/iPad screenshots, CSS entrance and scroll
   motion, reduced-motion support, a Mac download and an explicit private TestFlight beta. The
   source stays here; the normal build includes `/granita/` and the standalone build targets

@@ -124,6 +124,11 @@ nav a {
 nav a:hover {
   color: var(--mint);
 }
+.nav-source {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
 .nav-download {
   padding: 11px 16px;
   border: 1px solid #485267;
@@ -642,7 +647,7 @@ h3 {
     height: 32px;
   }
   nav {
-    gap: 0;
+    gap: 14px;
     font-size: 11px;
   }
   .workflow-link {
