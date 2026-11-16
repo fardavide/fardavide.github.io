@@ -61,6 +61,10 @@ screenshots are © Davide Farella and are not covered by it.
 
 ## Changelog
 
+### 0.2.2 — 2026-11-16
+
+- **Aura support and privacy.** Added setup and support information and published Aura’s privacy policy.
+
 ### 0.2.1 — 2026-11-08
 
 - **Project links are easy to find.** Granita and Oltre lead with a website action and a secondary
