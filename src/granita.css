@@ -529,6 +529,11 @@ h3 {
 .footer a:hover {
   color: var(--mint);
 }
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
 
 @keyframes enter {
   from {

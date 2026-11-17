@@ -61,6 +61,10 @@ screenshots are © Davide Farella and are not covered by it.
 
 ## Changelog
 
+### 0.2.3 — 2026-11-17
+
+- **Granita support and privacy.** Find help with pairing and read how review comments sync to your Mac.
+
 ### 0.2.2 — 2026-11-16
 
 - **Aura support and privacy.** Added setup and support information and published Aura’s privacy policy.
