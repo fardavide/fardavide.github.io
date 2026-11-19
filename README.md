@@ -61,6 +61,10 @@ screenshots are © Davide Farella and are not covered by it.
 
 ## Changelog
 
+### 0.2.4 — 2026-11-19
+
+- **Get Granita on iPhone and iPad.** The download section links to the App Store alongside the Mac download on GitHub. A Mac App Store release is coming soon.
+
 ### 0.2.3 — 2026-11-17
 
 - **Granita support and privacy.** Find help with pairing and read how review comments sync to your Mac.
