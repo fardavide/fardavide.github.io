@@ -61,6 +61,10 @@ screenshots are © Davide Farella and are not covered by it.
 
 ## Changelog
 
+### 0.2.5 — 2026-11-19
+
+- **Review on your Mac or away from your desk.** The download section explains local and remote review, with the required Mac companion mentioned below the iPhone and iPad download.
+
 ### 0.2.4 — 2026-11-19
 
 - **Get Granita on iPhone and iPad.** The download section links to the App Store alongside the Mac download on GitHub. A Mac App Store release is coming soon.

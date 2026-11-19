@@ -2,6 +2,8 @@
 
 ## Landed
 
+- **0.2.5**: Granita's download cards explain reviewing on the Mac and away from the desk. The
+  iPhone and iPad download note states that Granita for Mac is required.
 - **0.2.4**: Granita's download section links to the public iPhone and iPad App Store listing,
   keeps the Mac GitHub download, and mentions that the Mac App Store release is coming soon.
 - **0.2.1**: consistent project card actions. Granita and Oltre lead with Visit website and a
