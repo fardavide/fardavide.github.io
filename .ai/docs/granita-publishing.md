@@ -11,6 +11,13 @@ continues to use its existing Pages configuration at `fardavide.dev`.
   `CNAME` and `.nojekyll`. `npm run preview:granita` serves this output locally.
 - Both builds use the same Granita HTML, CSS, fonts and images. There is no second authored copy.
 
+Granita's social-preview cover is `granita/public/social/granita-cover.png`, copied unchanged
+from the app repository's approved `Art/AppStore/presentation.png` (1600 × 900, zigzag light/dark
+split). The standalone build copies it to `/social/granita-cover.png`. Canonical, Open Graph and
+Twitter card URLs use `https://granita.fardavide.dev/`, including when the same HTML is built at
+the portfolio's `/granita/` path. Preview copy describes the standalone Mac app and mobile
+companions; it does not imply that the Mac app is already on the Mac App Store.
+
 ## One-time setup
 
 1. After review, create `gh-pages` in `fardavide/granita` with the standalone build. The branch

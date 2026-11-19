@@ -2,6 +2,9 @@
 
 ## Landed
 
+- **0.2.6**: Granita's social-preview metadata uses the approved 1600 × 900 Mac/iPhone cover.
+  The title and description explain standalone Mac review and the iPhone/iPad companions.
+  The shared image is served from the standalone site's public directory at a stable HTTPS URL.
 - **0.2.5**: Granita's download cards explain reviewing on the Mac and away from the desk. The
   iPhone and iPad download note states that Granita for Mac is required.
 - **0.2.4**: Granita's download section links to the public iPhone and iPad App Store listing,

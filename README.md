@@ -61,6 +61,10 @@ screenshots are © Davide Farella and are not covered by it.
 
 ## Changelog
 
+### 0.2.6 — 2026-11-19
+
+- **Share Granita with its Mac and iPhone cover.** Link previews use the approved light/dark presentation artwork and explain standalone Mac review with optional iPhone and iPad companions.
+
 ### 0.2.5 — 2026-11-19
 
 - **Review on your Mac or away from your desk.** The download section explains local and remote review, with the required Mac companion mentioned below the iPhone and iPad download.
