@@ -1,0 +1,120 @@
+name: Publish Oltre
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'oltre/**'
+      - 'package.json'
+      - '.github/workflows/oltre-pages.yml'
+  pull_request:
+    paths:
+      - 'oltre/**'
+      - 'package.json'
+      - '.github/workflows/oltre-pages.yml'
+  repository_dispatch:
+    types: [oltre-site-refresh]
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish to oltre.space once the new publisher is enabled
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: oltre-pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build and test Oltre
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.14'
+
+      # Resolve the published version before checking out main, so its changelog is present
+      # even when a release finishes while this job is in progress.
+      - name: Read the published Android release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >
+          gh release view --repo fardavide/oltre --json tagName,publishedAt,url,assets
+          > "$RUNNER_TEMP/oltre-release.json"
+      - name: Check out Oltre's asset and changelog sources
+        uses: actions/checkout@v7
+        with:
+          repository: fardavide/oltre
+          ref: main
+          path: .oltre-app
+          persist-credentials: false
+      - name: Test the Oltre builder
+        run: |
+          python3 -m pip install --quiet pytest
+          npm run test:oltre -- --app-root .oltre-app
+      - name: Build Oltre
+        run: >
+          npm run build:oltre -- --app-root .oltre-app
+          --release "$RUNNER_TEMP/oltre-release.json" --out dist-oltre
+      - name: Record the build inputs
+        run: |
+          set -euo pipefail
+          release=$(jq -r .tagName "$RUNNER_TEMP/oltre-release.json")
+          app_sha=$(git -C .oltre-app rev-parse HEAD)
+          echo "Oltre $release built from website $GITHUB_SHA and app $app_sha." >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: oltre-site
+          path: dist-oltre/
+          include-hidden-files: true
+          if-no-files-found: error
+
+  publish:
+    name: Publish to oltre.space
+    needs: build
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      github.event_name != 'pull_request' &&
+      vars.OLTRE_PAGES_ENABLED == 'true' &&
+      (github.event_name != 'workflow_dispatch' || inputs.publish)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: oltre-site
+          path: dist-oltre
+      - name: Check out Oltre's publishing branch
+        uses: actions/checkout@v7
+        with:
+          repository: fardavide/oltre
+          ref: gh-pages
+          path: .oltre-pages
+          ssh-key: ${{ secrets.OLTRE_PAGES_DEPLOY_KEY }}
+      - name: Publish to gh-pages
+        run: |
+          set -euo pipefail
+          test -f dist-oltre/.nojekyll
+          test "$(cat dist-oltre/CNAME)" = oltre.space
+          rsync -a --delete --exclude '.git' dist-oltre/ .oltre-pages/
+          git -C .oltre-pages config user.name 'github-actions[bot]'
+          git -C .oltre-pages config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git -C .oltre-pages add --all
+          if git -C .oltre-pages diff --cached --quiet; then
+            echo 'Oltre is already up to date.' >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          git -C .oltre-pages commit -m "Publish Oltre from ${GITHUB_SHA:0:7}"
+          git -C .oltre-pages push origin HEAD:gh-pages
+          echo 'Pushed Oltre to gh-pages.' >> "$GITHUB_STEP_SUMMARY"

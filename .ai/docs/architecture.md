@@ -1,9 +1,8 @@
 # Architecture
 
-Two static pages with one layer: presentation. There is no domain or data layer because the
-sites hold no data. Every string is authored in markup. The portfolio's only runtime behaviour
-is choosing a colour theme; Granita uses HTML navigation and CSS motion without JavaScript.
-`status.md` records publication state.
+Static sites with one layer: presentation. The portfolio's runtime code chooses a colour theme.
+Granita uses HTML navigation and CSS motion. Oltre imports its published Android release and app
+assets at build time. `status.md` records publication state.
 
 ## Shape
 
@@ -23,6 +22,9 @@ is choosing a colour theme; Granita uses HTML navigation and CSS motion without 
 - The normal Vite build emits both documents, including `/granita/index.html`. The independent
   `vite.granita.config.ts` uses `granita/` as its root and emits only Granita to `dist-granita/`,
   with its own `CNAME` and `.nojekyll` from `granita/public/`.
+- `public/aura/` holds Aura's support and privacy pages, included in the portfolio output.
+- `oltre/site/` holds Oltre's landing template and static pages. `oltre/build_site.py` renders
+  the template and imports assets and changelog entries from a checkout of the app repository.
 
 ## Dependency rule
 
@@ -40,3 +42,6 @@ the `gh-pages` branch, which GitHub Pages serves under the custom domain (see `d
 Granita's standalone output goes to the Granita app repository's `gh-pages` branch through
 `.github/workflows/granita-pages.yml`, using a deploy key scoped to that repository. Source and
 review remain here. [Granita publishing](granita-publishing.md) describes the one-time setup.
+Oltre's standalone build writes `dist-oltre/`. The new publisher produces a review artifact and,
+once enabled, pushes it to Oltre's existing Pages branch. [Oltre publishing](oltre-publishing.md)
+describes the app release trigger and handoff.

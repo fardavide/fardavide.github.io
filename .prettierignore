@@ -1,6 +1,10 @@
 dist
 dist-granita
+dist-oltre
+# Keep the migrated Oltre HTML and its inline styles in the original format.
+oltre/site/
 node_modules
+.pytest_cache
 package-lock.json
 playwright-report
 test-results

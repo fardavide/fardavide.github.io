@@ -1,19 +1,16 @@
 # fardavide.dev
 
-Davide Farella's websites: the personal portfolio at [fardavide.dev](https://fardavide.dev),
-and Granita's landing page. The portfolio presents his work as a multi-platform developer and AI
-consultant, with a filmstrip of app screenshots and a card for each of Granita, Oltre, Aura and
-Swiftly. Granita is published at [granita.fardavide.dev](https://granita.fardavide.dev/), with a
-local preview at `/granita/`. Both sites' sources stay in this repository.
+Davide Farella's personal portfolio and the websites for Granita, Oltre, and Aura.
 
 ## Stack
 
-- Vite + TypeScript, no framework. Both pages are static HTML and CSS; TypeScript handles the
-  portfolio's theme override only. Granita uses a dark appearance and CSS motion.
+- Vite builds the portfolio, Granita, and Aura. They use static HTML and CSS, with TypeScript
+  for the portfolio's theme override.
+- Oltre's Python builder renders the landing page from a published Android release and app
+  assets, and copies the privacy and account-deletion pages verbatim.
 - Vitest for unit tests, Playwright for screenshot tests.
 - ESLint with type-checked typescript-eslint rules, Prettier, and `tsc --noEmit`.
-- Published from the `gh-pages` branch by a GitHub Actions workflow, the same way
-  [oltre.space](https://oltre.space) is.
+- GitHub Actions builds the sites, and GitHub Pages serves the generated branches.
 
 ## Develop
 
@@ -31,6 +28,14 @@ npm run build:granita    # writes the standalone subdomain site to dist-granita/
 npm run preview:granita  # serves that site at the preview server's root
 ```
 
+Oltre builds separately to `dist-oltre/`. Use a checkout of Oltre's `origin/main` for the
+screenshots, icons, and changelog. Use Python 3.14 and an authenticated GitHub CLI.
+
+```sh
+gh release view --repo fardavide/oltre --json tagName,publishedAt,url,assets > /tmp/oltre-release.json
+npm run build:oltre -- --app-root ../Oltre --release /tmp/oltre-release.json --out dist-oltre
+```
+
 ## Test
 
 ```sh
@@ -44,20 +49,48 @@ npm run format:check        # Prettier
 Screenshot baselines are recorded on a Mac with `npm run test:screenshots -- --update-snapshots`
 and verified on a macOS runner in CI, so the comparison is byte-exact.
 
+Install pytest in your Python environment and run
+`npm run test:oltre -- --app-root ../Oltre` to check the Oltre builder and its app inputs.
+
 ## Publish
 
-Merging to `main` publishes. The `Publish the site` workflow (`.github/workflows/pages.yml`)
-builds `dist/` and pushes it to the `gh-pages` branch, which GitHub Pages serves. There is no
-manual release step; the workflow can also be dispatched by hand to republish without a change.
+### Portfolio
 
-Granita's separate workflow publishes `dist-granita/` to the app repository's `gh-pages` branch.
-Its Pages, deploy-key, DNS and HTTPS setup is complete. See
-[Granita publishing](.ai/docs/granita-publishing.md) for the configuration and verification record.
+The portfolio lives in `index.html`, `src/`, and `public/`.
+[Publish the site](.github/workflows/pages.yml) builds `dist/` on relevant pushes to `main`
+or manual dispatch and pushes it to this repository's `gh-pages`.
+[fardavide.dev](https://fardavide.dev/) · [GitHub Pages redirect](https://fardavide.github.io/)
+
+### Aura
+
+Aura's support and privacy pages live in `public/aura/` and publish with the portfolio.
+[Support](https://fardavide.dev/aura/support.html) · [Privacy](https://fardavide.dev/aura/privacy.html)
+
+### Granita
+
+Granita's landing, support, and privacy pages live in `granita/` and use `src/granita.css` for
+the landing page. [Publish Granita](.github/workflows/granita-pages.yml) builds `dist-granita/`
+on relevant pushes to `main` or manual dispatch and pushes it to
+[Granita's `gh-pages`](https://github.com/fardavide/granita/tree/gh-pages). See
+[Granita publishing](.ai/docs/granita-publishing.md) for the Pages setup.
+[Landing page](https://granita.fardavide.dev/) · [Support](https://granita.fardavide.dev/support/) ·
+[Privacy](https://granita.fardavide.dev/privacy/)
+
+### Oltre
+
+Oltre's landing, privacy, and account-deletion pages and their builder live in `oltre/`.
+[Publish Oltre](.github/workflows/oltre-pages.yml) builds on relevant pushes to `main`, manual
+dispatch, and `oltre-site-refresh` events from the app repository. After cutover it pushes
+`dist-oltre/` to [Oltre's `gh-pages`](https://github.com/fardavide/oltre/tree/gh-pages).
+See [Oltre publishing](.ai/docs/oltre-publishing.md) for the review build, release relay, and cutover.
+[Landing page](https://oltre.space/) · [Privacy](https://oltre.space/privacy.html) ·
+[Account deletion](https://oltre.space/delete-account.html)
 
 ## Licence
 
-The code is released under the MIT licence (see `LICENSE`). The text, the name and the app
-screenshots are © Davide Farella and are not covered by it.
+The portfolio, Granita, and Aura website code is released under the MIT licence (see `LICENSE`).
+The text, the name and the app screenshots are © Davide Farella. The imported Oltre files retain
+their original terms.
 
 ## Changelog
 
