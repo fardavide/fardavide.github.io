@@ -166,3 +166,14 @@ This supersedes the macOS 26 runner choice above. CI still verifies rather than 
 The next CI run confirms all 16 browser checks pass on macOS 27.0.1 (26A434), including all six
 page baselines. Matching the recording and verification OS resolves the measured differences
 without relaxing the comparator.
+
+## Keep Oltre's Pages destination when moving the source
+
+Oltre's template, static pages, builder, and builder tests live here. Its app repository supplies
+the screenshots, icons, and changelog. The build still selects the version and APK from GitHub's
+latest published Android release and reads the matching entry through Oltre's release script.
+
+The generated site continues to live on Oltre's `gh-pages` with the existing `oltre.space` custom
+domain. The website workflow builds a review artifact and uses a dedicated deploy key for writes
+after cutover. A relay in Oltre requests a new build after a successful Android release or changes
+to app-owned inputs. See [Oltre publishing](oltre-publishing.md) for the cutover and rollback.
